@@ -79,5 +79,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Configure
+        run: eas build:configure
+
       - name: Build Android APK Bundle
-        run: expo build:android
+        run: eas build -p android

@@ -12,35 +12,35 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: adopt
-          cache: gradle
-
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
-
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: "18"
-          cache: "yarn"
+          cache: "npm"
 
-      - name: Run Yarn Install
-        run: |
-          npm i -g corepack
-          yarn install
+      - name: Install Expo CLI
+        run: npm install -g expo-cli
 
-      - name: Build application
-        run: |
-          cd android
-          ./gradlew assembleRelease
+      - name: Install project dependencies
+        run: npm install
 
-      - name: Upload application
+      - name: Build Expo app
+        run: expo build:android
+
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v2
         with:
           name: app
-          path: android/app/build/outputs/apk/release/app-release.apk
-          retention-days: 3
+          path: ./outputs/apk/release/app-release.apk
+#       - name: Build application
+#         run: |
+#           cd android
+#           ./gradlew assembleRelease
+
+#       - name: Upload application
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: app
+#           path: android/app/build/outputs/apk/release/app-release.apk
+#           retention-days: 3
+

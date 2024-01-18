@@ -68,7 +68,7 @@ jobs:
           cache: npm
 
       - name: Install Expo CLI
-        run: npm install -g expo-cli
+        run: npm install -g eas-cli
 
       - name: Setup EAS
         uses: expo/expo-github-action@v8
@@ -79,11 +79,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Publish update
-        run: eas update --auto
+      # - name: Publish update
+      #   run: eas update --auto
 
       - name: Configure
         run: eas build:configure
 
-      - name: Build Android APK Bundle
-        run: eas build -p android
+      # - name: Build Android APK Bundle
+      #   run: eas build -p android

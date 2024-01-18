@@ -67,6 +67,9 @@ jobs:
           node-version: 18.x
           cache: npm
 
+      - name: Install Expo CLI
+        run: npm install -g expo-cli
+
       - name: Setup EAS
         uses: expo/expo-github-action@v8
         with:

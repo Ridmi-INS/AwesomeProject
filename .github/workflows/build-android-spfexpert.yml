@@ -89,45 +89,44 @@
 #       #   run: eas build -p android
 
 #latest
-# name: update
-# on: push
+name: update
+on: push
 
-# jobs:
-#   build:
-#     name: EAS Update
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Check for EXPO_TOKEN
-#         run: |
-#           if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
-#             echo "You must provide an EXPO_TOKEN secret linked to this project's Expo account in this repo's secrets. Learn more: https://docs.expo.dev/eas-update/github-actions"
-#             exit 1
-#           fi
+jobs:
+  build:
+    name: EAS Update
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for EXPO_TOKEN
+        run: |
+          if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
+            echo "You must provide an EXPO_TOKEN secret linked to this project's Expo account in this repo's secrets. Learn more: https://docs.expo.dev/eas-update/github-actions"
+            exit 1
+          fi
 
-#       - name: Checkout repository
-#         uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-#       - name: Setup Node
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: 18.x
-#           cache: yarn
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: yarn
 
-#       - name: Setup EAS
-#         uses: expo/expo-github-action@v8
-#         with:
-#           eas-version: latest
-#           token: ${{ secrets.EXPO_TOKEN }}
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
 
-#       - name: Install dependencies
-#         run: yarn install
+      - name: Install dependencies
+        run: yarn install
 
-#       # - name: Publish update
-#       #   run: eas update --auto
+      # - name: Publish update
+      #   run: eas update --auto
 
-#       - name: Build Application
-#         run: eas build --platform android --profile preview
-
+      - name: Build Application
+        run: eas build -p android
 # name: Build Expo Project
 
 # on:
@@ -169,33 +168,33 @@
 #         name: my-app
 #         path: my-app.apk
 
-name: Build Expo Project
+# name: Build Expo Project
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18" # Set this to the version of Node.js that matches your development environment
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: "18" # Set this to the version of Node.js that matches your development environment
 
-      - name: Install dependencies
-        run: |
-          npm install -g expo-cli
-          npm install -g eas-cli
-          npm install
+#       - name: Install dependencies
+#         run: |
+#           npm install -g expo-cli
+#           npm install -g eas-cli
+#           npm install
 
-      - name: Login to Expo
-        run: expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
+#       - name: Login to Expo
+#         run: expo login -u ${{ secrets.EXPO_CLI_USERNAME }} -p ${{ secrets.EXPO_CLI_PASSWORD }}
 
-      - name: Build APK
-        run: eas build -p android
+#       - name: Build APK
+#         run: eas build -p android

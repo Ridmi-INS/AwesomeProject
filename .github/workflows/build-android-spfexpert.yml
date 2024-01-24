@@ -120,5 +120,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Publish update
-        run: eas update --auto
+      # - name: Publish update
+      #   run: eas update --auto
+
+      - name: Build Application
+        run: eas build
